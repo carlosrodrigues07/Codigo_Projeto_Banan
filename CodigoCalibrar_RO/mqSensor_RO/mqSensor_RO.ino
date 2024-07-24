@@ -27,7 +27,7 @@ class MQSensor {
 
     float calculateRS(float sensor_VRL) {
       // Calcular a resistência do sensor com base na tensão e resistência de carga
-      return RL / ((VC / sensor_VRL) - 1.0);
+      return (VC / sensor_VRL - 1.0) * RL;
     }
 };
 
@@ -61,19 +61,20 @@ void loop() {
   // Lê Ro MQ-135
   float R0_MQ135 = MQSensor135.calculateR0();
 
-  // Exibe os resultados
-  Serial.print("Valor R0 MQ2: ");
-  Serial.println(R0_MQ2);
-  Serial.print("Valor R0 MQ3: ");
-  Serial.println(R0_MQ3);
-  Serial.print("Valor R0 MQ4: ");
-  Serial.println(R0_MQ4);
-  Serial.print("Valor R0 MQ6: ");
-  Serial.println(R0_MQ6);
-  Serial.print("Valor R0 MQ7: ");
-  Serial.println(R0_MQ7);
-  Serial.print("Valor R0 MQ135: ");
+  // Exibe os resultados em formato de tabela
+  Serial.println("Sensor\tMQ-2\tMQ-3\tMQ-4\tMQ-6\tMQ-7\tMQ-135");
+  Serial.print("R0\t");
+  Serial.print(R0_MQ2);
+  Serial.print("\t");
+  Serial.print(R0_MQ3);
+  Serial.print("\t");
+  Serial.print(R0_MQ4);
+  Serial.print("\t");
+  Serial.print(R0_MQ6);
+  Serial.print("\t");
+  Serial.print(R0_MQ7);
+  Serial.print("\t");
   Serial.println(R0_MQ135);
 
   delay(90000); // Espera 90 segundos antes da próxima leitura
-}
+};

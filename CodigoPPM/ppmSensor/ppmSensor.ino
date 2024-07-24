@@ -20,7 +20,7 @@ class GasSensor {
     }
 
     float calculateRS(float VRL) {
-      return ((VC / VRL) - 1) * RL;
+      return ((VC / VRL) - 1.0) * RL;
     }
 
     float calculateRatio(float RS) {
@@ -30,49 +30,49 @@ class GasSensor {
 
 class MQ2Sensor : public GasSensor {
   public:
-    MQ2Sensor(int pin) : GasSensor(pin, 0.04, 5.0, 1) {}
+    MQ2Sensor(int pin) : GasSensor(pin, 0.04, 5.0, 1.0) {}
     float calculatePPM(float ratio) {
-      return pow((18.365 / ratio), (1 / 0.453));
+      return pow((18.365 / ratio), (1.0 / 0.453));
     }
 };
 
 class MQ3Sensor : public GasSensor {
   public:
-    MQ3Sensor(int pin) : GasSensor(pin, 0.01, 5.0, 1) {}
+    MQ3Sensor(int pin) : GasSensor(pin, 0.00, 5.0, 1.0) {}
     float calculatePPM(float ratio) {
-      return pow((0.5312 / ratio), (1 / 0.668));
+      return pow((0.5312 / ratio), (1.0 / 0.668));
     }
 };
 
 class MQ4Sensor : public GasSensor {
   public:
-    MQ4Sensor(int pin) : GasSensor(pin, 0.02, 5.0, 1) {}
+    MQ4Sensor(int pin) : GasSensor(pin, 0.02, 5.0, 1.0) {}
     float calculatePPM(float ratio) {
-      return pow((23.114 / ratio), (1 / 0.376));
+      return pow((23.114 / ratio), (1.0 / 0.376));
     }
 };
 
 class MQ6Sensor : public GasSensor {
   public:
-    MQ6Sensor(int pin) : GasSensor(pin, 0.01, 5.0, 1) {}
+    MQ6Sensor(int pin) : GasSensor(pin, 0.01, 5.0, 1.0) {}
     float calculatePPM(float ratio) {
-      return pow((21.52 / ratio), (1 / 0.264));
+      return pow((21.52 / ratio), (1.0 / 0.264));
     }
 };
 
 class MQ7Sensor : public GasSensor {
   public:
-    MQ7Sensor(int pin) : GasSensor(pin, 0.01, 5.0, 1) {}
+    MQ7Sensor(int pin) : GasSensor(pin, 0.01, 5.0, 1.0) {}
     float calculatePPM(float ratio) {
-      return pow((17.32 / ratio), (1 / 0.065));
+      return pow((19.32 / ratio), (1.0 / 0.065));
     }
 };
 
 class MQ135Sensor : public GasSensor {
   public:
-    MQ135Sensor(int pin) : GasSensor(pin, 0.04, 5.0, 1) {}
+    MQ135Sensor(int pin) : GasSensor(pin, 0.04, 5.0, 1.0) {}
     float calculatePPM(float ratio) {
-      return pow((5.1927 / ratio), (1 / 0.352));
+      return pow((5.1927 / ratio), (1.0 / 0.352));
     }
 };
 
@@ -149,10 +149,11 @@ void loop() {
   Serial.print("MQ7: = ");
   Serial.print(MQ7ppm);
   Serial.print(" ppm");
+ 
 
   Serial.print("MQ135: = ");
   Serial.print(MQ135ppm);
-  Serial.print(" ppm");
+  Serial.print(" ppm\n");
 
-  delay(300000);
+  delay(3000);
 }
